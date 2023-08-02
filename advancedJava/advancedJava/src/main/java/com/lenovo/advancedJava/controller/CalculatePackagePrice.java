@@ -21,5 +21,6 @@ public class CalculatePackagePrice {
 		}
 		
 		return service.calculatePackagePrice(pckg);
+		 
 	}
 }
