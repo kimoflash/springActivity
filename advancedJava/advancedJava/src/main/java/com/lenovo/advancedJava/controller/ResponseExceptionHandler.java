@@ -7,35 +7,26 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.lenovo.advancedJava.exception.ValidationException;
+import com.lenovo.advancedJava.exceptions.ValidationException;
 
 @RestControllerAdvice
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception exception, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse("Server error");
+		ExceptionResponse exceptionResponse = new ExceptionResponse("This is sample error");
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(ValidationException.class)
-	public final ResponseEntity<ExceptionResponse> handleAllExceptions(ValidationException exception, WebRequest request) {
+	public final ResponseEntity<ExceptionResponse> handle(ValidationException exception, WebRequest request) {
 		
-		ExceptionResponse exceptionResponse = new ExceptionResponse("Validation error");
+		ExceptionResponse exceptionResponse = new ExceptionResponse(exception.getMessage());
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 	
-//	@ExceptionHandler(ValidationException.class)
-//	public final ResponseEntity<ExceptionResponse> handleExceptions(ValidationException exception, WebRequest request) {
-//		
-//		ExceptionResponse exceptionResponse = new ExceptionResponse("Validation error");
-//		
-//		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
-//	}
-	
-	//SHOULD I CREATE A CLASS W/ A LIST OF VALIDATION?
 	public record ExceptionResponse(String message) {
 		
 	}

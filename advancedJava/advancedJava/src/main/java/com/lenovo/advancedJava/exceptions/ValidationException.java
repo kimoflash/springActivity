@@ -1,4 +1,4 @@
-package com.lenovo.advancedJava.exception;
+package com.lenovo.advancedJava.exceptions;
 
 public class ValidationException extends RuntimeException {
 
