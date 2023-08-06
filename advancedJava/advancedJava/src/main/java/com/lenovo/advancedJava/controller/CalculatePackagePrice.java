@@ -18,17 +18,9 @@ public class CalculatePackagePrice {
 	
 	@PostMapping("/calculatePrice")
 	public double calculatePrice(@RequestBody PackageModel pckg) throws Exception {
-		
-		
-//		if (isEmpty(pckg.getHeight()) && isEmpty(pckg.getLength()) && isEmpty(pckg.getWeight()) && isEmpty(pckg.getWidth())) {
-//		    throw new ValidationException("Invalid input. Height, length, weight, and width should be greater than 0!");
-//		}
-//		
-//		if((pckg.getHeight() <0) && (pckg.getLength() <= 0) && (pckg.getWeight() <= 0) && (pckg.getWidth() <= 0)) {
-//			throw new ValidationException("Invalid input. Values should not be empty!");
-//		}
 
-		
+		//Other way to write the exceptions
+		/*
 		if(pckg.getLength() <= 0) {
 			throw new ValidationException("Invalid input. Length should be greater than 0!");
 		}
@@ -46,16 +38,33 @@ public class CalculatePackagePrice {
 		}
 		
 		return service.calculatePackagePrice(pckg);
+		*/
 		
-//		double result = 0;
-//		
-//		try {
-//			result = service.calculatePackagePrice(pckg);
-//		} catch(Exception e) {
-//			throw e;
-//		}
-//		
-//		return result;
+		//try and catch method
+		try {
+			if (pckg.getLength() <= 0) {
+				throw new ValidationException("Invalid input. Length should be greater than 0!");
+			}
+			
+			if (pckg.getWidth() <= 0) {
+				throw new ValidationException("Invalid input. Width should be greater than 0!");
+			}
+			
+			if (pckg.getHeight() <= 0) {
+				throw new ValidationException("Invalid input. Height should be greater than 0!");
+			}
+			
+			if (pckg.getWeight() <= 0) {
+				throw new ValidationException("Invalid input. Weight should be greater than 0!");
+			}
+			
+			return service.calculatePackagePrice(pckg);
+		} catch (ValidationException validationException) {
+			throw validationException;
+		} catch (Exception e) {
+			throw new Exception("An error occurred during package price calculation.", e);
+		}
+
 		 
 	}
 }

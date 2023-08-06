@@ -20,7 +20,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception exception, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse("This is sample error");
+		ExceptionResponse exceptionResponse = new ExceptionResponse("An internal server error occured.");
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -32,6 +32,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
+	
 	
 	public record ExceptionResponse(String message) {
 		
