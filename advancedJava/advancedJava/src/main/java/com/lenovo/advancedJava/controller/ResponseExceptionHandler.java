@@ -12,12 +12,6 @@ import com.lenovo.advancedJava.exceptions.ValidationException;
 @RestControllerAdvice
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 	
-//	@ExceptionHandler(SuccessException.class)
-//    public ResponseEntity<SuccessResponse> handleCustomSuccessException(SuccessException exception) {
-//        SuccessResponse successResponse = new SuccessResponse(exception.getMessage());
-//        return new ResponseEntity<>(successResponse, HttpStatus.OK);
-//    }
-	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception exception, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse("An internal server error occured.");

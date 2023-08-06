@@ -40,7 +40,12 @@ public class CalculatePackagePrice {
 		return service.calculatePackagePrice(pckg);
 		*/
 		
-		//try and catch method
+		//checks if the all the parameters are empty or equal/less than zero the throws error message
+		if (pckg.getLength() <= 0 && pckg.getWidth() <= 0 && pckg.getHeight() <= 0 && pckg.getWeight() <= 0) {
+			throw new ValidationException("Invalid input. All parameters should be greater than 0!");
+		}
+		
+		//try and catch method - with custom error message per parameter
 		try {
 			if (pckg.getLength() <= 0) {
 				throw new ValidationException("Invalid input. Length should be greater than 0!");
